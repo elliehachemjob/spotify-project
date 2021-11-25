@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -54,9 +55,15 @@ function ArtistAlbums(props: Props) {
       <pre> Album Name is {albumName}</pre>
       <pre> Release Data is {releaseData}</pre>
       <pre> Total Tracks are {totalTracks}</pre>
-      <pre> Album Spotify Preview is {albumLink}</pre>
       <pre> Artist Inlcuded are {artistIncluded}</pre>
       <pre> Album Cover Is {albumCover}</pre>
+      <pre
+        onClick={() => {
+          window.open(albumLink);
+        }}
+      >
+        Click to see Albumn Preview
+      </pre>
     </div>
   );
 }
