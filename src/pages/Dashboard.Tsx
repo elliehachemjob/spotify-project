@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchComponent from "../components/SearchComponent";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -72,6 +73,9 @@ function Dashboard() {
       <img src={image} style={{ width: 100, height: 100 }} />
       <pre>The Followers is {followers}</pre>
       <pre>The name is {name} </pre>
+      <Link to="/artist/albums">
+        <button>Create</button>
+      </Link>
     </div>
   );
 }
