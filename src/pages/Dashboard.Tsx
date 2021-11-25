@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
 import ArtistCard from "../components/ArtistCard";
+import "../App.css";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -76,16 +77,23 @@ function Dashboard() {
     if (image) setImage(image.replace('"', ""));
   }, [image]);
 
+  const linkHandler = () => {
+    return <Link to="/artist/albums"></Link>;
+  };
+
   return (
-    <div>
+    <div className="container">
       <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
-      <ArtistCard
-        image={image}
-        name={name}
-        value={value}
-        setValue={setValue}
-        followers={followers}
-      />
+
+      <Link to="/artist/albums">
+        <ArtistCard
+          image={image}
+          name={name}
+          value={value}
+          setValue={setValue}
+          followers={followers}
+        />
+      </Link>
     </div>
   );
 }
@@ -99,7 +107,7 @@ export default Dashboard;
 <img src={image} style={{ width: 100, height: 100 }} />
 <pre>The Followers is {followers}</pre>
 <pre>The name is {name} </pre>
-<Link to="/artist/albums">
-  <button>Create</button>
+
+<button>Create</button>
 </Link> */
 }

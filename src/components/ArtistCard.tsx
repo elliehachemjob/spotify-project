@@ -11,7 +11,7 @@ import Rating from "@mui/material/Rating";
 function App(props: any) {
   return (
     <Card sx={{ maxWidth: 300 }}>
-      <CardContent>
+      <CardContent onClick={props.linkHandler}>
         <CardMedia
           component="img"
           height="200"
