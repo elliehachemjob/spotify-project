@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
+import ArtistCard from "../components/ArtistCard";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -20,6 +21,8 @@ function Dashboard() {
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [value, setValue] = useState(2);
+
+  const [cards, setCards] = useState<any>([]);
 
   const searchArtist = (e: any) => {
     setSearchQuery(e.target.value);
@@ -76,29 +79,13 @@ function Dashboard() {
   return (
     <div>
       <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
-      <Card sx={{ maxWidth: 300 }}>
-        <CardContent>
-          <CardMedia
-            component="img"
-            height="200"
-            image={image}
-            alt="album cover"
-          />
-          <Typography>{name}</Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {followers}
-          </Typography>
-
-          <Rating
-            style={{ position: "relative", top: 25, right: 4.5 }}
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue: any) => {
-              setValue(newValue);
-            }}
-          />
-        </CardContent>
-      </Card>
+      <ArtistCard
+        image={image}
+        name={name}
+        value={value}
+        setValue={setValue}
+        followers={followers}
+      />
     </div>
   );
 }
