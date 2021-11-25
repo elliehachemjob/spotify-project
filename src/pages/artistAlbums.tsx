@@ -5,6 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
 
 interface Props {}
 
@@ -56,21 +57,14 @@ function ArtistAlbums(props: Props) {
 
   return (
     <div onClick={AlbumSearch}>
-      <pre> Album Name is {albumName}</pre>
-      <pre> Release Data is {releaseData}</pre>
-      <pre> Total Tracks are {totalTracks}</pre>
-      <pre> Artist Inlcuded are {artistIncluded}</pre>
-      <pre> Album Cover Is {albumCover}</pre>
-      <pre
-        onClick={() => {
-          window.open(albumLink);
-        }}
-      >
-        Click to see Albumn Preview
-      </pre>
-
       <Card sx={{ maxWidth: 300 }}>
         <CardContent>
+          <CardMedia
+            component="img"
+            height="200"
+            image={albumCover}
+            alt="album cover"
+          />
           <Typography>{albumName}</Typography>
 
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -111,3 +105,20 @@ function ArtistAlbums(props: Props) {
 }
 
 export default ArtistAlbums;
+
+// to check
+
+{
+  /* <pre> Album Name is {albumName}</pre>
+      <pre> Release Data is {releaseData}</pre>
+      <pre> Total Tracks are {totalTracks}</pre>
+      <pre> Artist Inlcuded are {artistIncluded}</pre>
+      <pre> Album Cover Is {albumCover}</pre>
+      <pre
+        onClick={() => {
+          window.open(albumLink);
+        }}
+      >
+        Click to see Albumn Preview
+      </pre> */
+}
