@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import SearchComponent from "../components/SearchComponent";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
+import Rating from "@mui/material/Rating";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -12,6 +19,7 @@ function Dashboard() {
   const [image, setImage] = useState<any>();
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [value, setValue] = useState(2);
 
   const searchArtist = (e: any) => {
     setSearchQuery(e.target.value);
@@ -68,16 +76,43 @@ function Dashboard() {
   return (
     <div>
       <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
+      <Card sx={{ maxWidth: 300 }}>
+        <CardContent>
+          <CardMedia
+            component="img"
+            height="200"
+            image={image}
+            alt="album cover"
+          />
+          <Typography>{name}</Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {followers}
+          </Typography>
 
-      <pre>The popularity is {popularity}</pre>
-      <img src={image} style={{ width: 100, height: 100 }} />
-      <pre>The Followers is {followers}</pre>
-      <pre>The name is {name} </pre>
-      <Link to="/artist/albums">
-        <button>Create</button>
-      </Link>
+          <Rating
+            style={{ position: "relative", top: 25, right: 4.5 }}
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue: any) => {
+              setValue(newValue);
+            }}
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 }
 
 export default Dashboard;
+
+//later
+
+{
+  /* <pre>The popularity is {popularity}</pre>
+<img src={image} style={{ width: 100, height: 100 }} />
+<pre>The Followers is {followers}</pre>
+<pre>The name is {name} </pre>
+<Link to="/artist/albums">
+  <button>Create</button>
+</Link> */
+}
