@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 interface Props {}
 
@@ -64,6 +68,44 @@ function ArtistAlbums(props: Props) {
       >
         Click to see Albumn Preview
       </pre>
+
+      <Card sx={{ maxWidth: 300 }}>
+        <CardContent>
+          <Typography>{albumName}</Typography>
+
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            Tom Petty
+          </Typography>
+          <Typography
+            sx={{ position: "relative", top: 35 }}
+            color="text.secondary"
+          >
+            {releaseData}
+          </Typography>
+          <Typography
+            sx={{ position: "relative", top: 30 }}
+            color="text.secondary"
+          >
+            {totalTracks} tracks
+          </Typography>
+          <Typography
+            sx={{ position: "relative", top: 25 }}
+            color="text.secondary"
+          >
+            {artistIncluded}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            onClick={() => {
+              window.open(albumLink);
+            }}
+            size="small"
+          >
+            Preview On Spotify
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   );
 }
