@@ -42,16 +42,45 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
-      {items
-        ? items.artists?.items
-            ?.filter((item: any) =>
-              item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
-            )
-            .map((filteredItem: any) => {
-              return <li>{filteredItem.name}</li>;
-            })
-        : null}
+      <div>
+        <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
+        {items
+          ? items.artists?.items
+              ?.filter((item: any) =>
+                item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+              )
+              .map((filteredItem: any) => {
+                return (
+                  <div>
+                    <li>
+                      Artist Name: {filteredItem.name}
+                      Followers Count: {filteredItem.followers.total}
+                      Popularity: {filteredItem.popularity}
+                      Id: {filteredItem.id}
+                    </li>
+                    <li>
+                      {filteredItem.images
+                        .filter((img: any) => img.height === 640)
+                        .map((img: any) => {
+                          return <img src={img.url} />;
+                        })}
+                    </li>
+                  </div>
+                );
+              })
+          : null}
+      </div>
+      {/* <div className="container">
+        {items
+          ? items.artists?.items
+              ?.filter((item: any) =>
+                item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+              )
+              .map((filteredItem: any) => {
+                return <li>{filteredItem.name}</li>;
+              })
+          : null}
+      </div> */}
     </div>
   );
 }
