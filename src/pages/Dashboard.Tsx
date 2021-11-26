@@ -60,7 +60,7 @@ function Dashboard() {
                     </li>
                     <li>
                       {filteredItem.images
-                        .filter((img: any) => img.height === 640)
+                        .filter((img: any) => img.height === 160)
                         .map((img: any) => {
                           return <img src={img.url} />;
                         })}
@@ -70,17 +70,6 @@ function Dashboard() {
               })
           : null}
       </div>
-      {/* <div className="container">
-        {items
-          ? items.artists?.items
-              ?.filter((item: any) =>
-                item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
-              )
-              .map((filteredItem: any) => {
-                return <li>{filteredItem.name}</li>;
-              })
-          : null}
-      </div> */}
     </div>
   );
 }
