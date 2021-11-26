@@ -13,7 +13,7 @@ import "../App.css";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("a");
-  const [value, setValue] = useState<any>(2);
+  const [value, setValue] = useState<any>();
   const [items, setItems] = useState<any>();
 
   const searchArtist = (e: any) => {
@@ -75,20 +75,27 @@ function Dashboard() {
                       >
                         {filteredItem.followers.total} followers
                       </Typography>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        {filteredItem.popularity} popularity
+                      </Typography>
 
                       <Typography
                         sx={{ position: "relative", top: 30 }}
                         color="text.secondary"
                       >
-                        {filteredItem.tracks} tracks
+                        {filteredItem.y} tracks
                       </Typography>
                       <Rating
                         style={{ position: "relative", top: 25, right: 4.5 }}
                         name="simple-controlled"
-                        value={filteredItem.popularity}
-                        onChange={(event, newValue) => {
-                          setValue(newValue);
-                        }}
+                        value={filteredItem.popularity > 40 ? 5 : 3}
+                        // onChange={(event, newValue) => {
+                        //   setValue(5);
+                        // }}
                       />
                     </CardContent>
                   </Card>
