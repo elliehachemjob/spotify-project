@@ -13,17 +13,9 @@ import ArtistCard from "../components/ArtistCard";
 import "../App.css";
 
 function Dashboard() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [token, setToken] = useState<any>("");
-  const [data, setData] = useState<any>([]);
-  const [popularity, setPopularity] = useState<string>("");
-  const [followers, setFollowers] = useState<string>("");
-  const [image, setImage] = useState<any>();
-  const [id, setId] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("a");
   const [value, setValue] = useState(2);
-
-  const [cards, setCards] = useState<any>([]);
+  const [items, setItems] = useState<any>();
 
   const searchArtist = (e: any) => {
     setSearchQuery(e.target.value);
@@ -35,65 +27,31 @@ function Dashboard() {
           headers: {
             Authorization:
               "Bearer " +
-              "BQDMm5J1Y_tQ-ANet7ZzmcpjZgseUYt07v_k2AcxlXO2ercapewXcPLTTXK44Dy-Qkaz_a-jaGvNRxfxQzrvGnGjlaGwC0VlkZcvYyK5auVLkzn-U4eOwQoEA8Yg-0h8ouwlbbMZVxgM1zE829GsRt_0yrFr4zqZRlZccyS458fD02JGzQ",
+              "BQBGWT-px2FRPl522lyrrfuTfSxHfThgJss6keHiy-7VvHqK0gRZ7RfPYXKzxW8ptR31icXj3yuwXkDbXeeBfAUbeBwFRN59owzX2_KDDAUQDHtop5669v4hsQn0kRYjhjPrCB2Oxap7wF_6ZsRswzcBqi1a_YbeIsA-mykTScpnAhSxww",
           },
         }
       )
       .then((response) => {
-        console.log(
-          // `main data  ${JSON.stringify(response)}`,
-          `followers is ${JSON.stringify(
-            response.data.artists.items[0].followers.total
-          )}`,
-          `image is ${JSON.stringify(
-            response.data.artists.items[0].images[0].url
-          )}`,
-          `popularity is  ${JSON.stringify(
-            response.data.artists.items[0].popularity
-          )}`,
-          `id is   ${JSON.stringify(response.data.artists.items[0].id)}`
-        );
-
-        setPopularity(
-          JSON.stringify(response.data.artists.items[0].popularity)
-        );
-        setFollowers(
-          JSON.stringify(response.data.artists.items[0].followers.total)
-        );
-        setId(JSON.stringify(response.data.artists.items[0].id));
-        setName(JSON.stringify(response.data.artists.items[0].name));
-        setImage(JSON.stringify(response.data.artists.items[0].images[0].url));
+        setItems(response.data);
+        console.log(items);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    if (name) setName(name.replace('"', ""));
-  }, [name]);
-
-  useEffect(() => {
-    if (image) setImage(image.replace('"', ""));
-  }, [image]);
-
-  const linkHandler = () => {
-    return <Link to="/artist/albums"></Link>;
-  };
-
   return (
     <div className="container">
       <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
-
-      <Link to="/artist/albums">
-        <ArtistCard
-          image={image}
-          name={name}
-          value={value}
-          setValue={setValue}
-          followers={followers}
-        />
-      </Link>
+      {items
+        ? items.artists?.items
+            ?.filter((item: any) =>
+              item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+            )
+            .map((filteredItem: any) => {
+              return <li>{filteredItem.name}</li>;
+            })
+        : null}
     </div>
   );
 }
