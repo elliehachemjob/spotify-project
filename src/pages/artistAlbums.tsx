@@ -48,24 +48,62 @@ function ArtistAlbums(props: Props) {
         ? items.items.map((item: any) => {
             return (
               <div>
-                <li>
-                  {item.images
-                    .filter((img: any) => img.height === 300)
-                    .map((img: any) => {
-                      return <img src={img.url} alt="image here" />;
-                    })}
-                </li>
-                <li>
-                  Artist Name: {item.name}
-                  Release Date :{item.release_date}
-                  Total Tracks: {item.total_tracks}
-                  Spotify Album Link : {item.external_urls.spotify}
-                </li>
-                <div>
-                  {item.artists.map((artistsIncluded: any) => {
-                    return <li>Artists Included {artistsIncluded.name}</li>;
-                  })}
-                </div>
+                <Card sx={{ maxWidth: 300 }}>
+                  <CardContent>
+                    {item.images
+                      .filter((img: any) => img.height === 300)
+                      .map((img: any) => {
+                        return (
+                          <CardMedia
+                            component="img"
+                            height="200"
+                            image={img.url}
+                            alt="album cover"
+                          />
+                        );
+                      })}
+
+                    <Typography>{item.name}</Typography>
+
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {item.name}
+                    </Typography>
+                    <Typography
+                      sx={{ position: "relative", top: 35 }}
+                      color="text.secondary"
+                    >
+                      {item.release_date}
+                    </Typography>
+                    <Typography
+                      sx={{ position: "relative", top: 30 }}
+                      color="text.secondary"
+                    >
+                      {item.total_tracks} tracks
+                    </Typography>
+                    <Typography
+                      sx={{ position: "relative", top: 25 }}
+                      color="text.secondary"
+                    >
+                      {item.artists.map((artistsIncluded: any) => {
+                        return <li>Artists Included {artistsIncluded.name}</li>;
+                      })}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      onClick={() => {
+                        window.open(item.external_urls.spotify);
+                      }}
+                      size="small"
+                    >
+                      Preview On Spotify
+                    </Button>
+                  </CardActions>
+                </Card>
               </div>
             );
           })
@@ -91,4 +129,33 @@ export default ArtistAlbums;
       >
         Click to see Albumn Preview
       </pre> */
+}
+
+{
+  /* {items
+        ? items.items.map((item: any) => {
+            return (
+              <div>
+                <li>
+                  {item.images
+                    .filter((img: any) => img.height === 300)
+                    .map((img: any) => {
+                      return <img src={img.url} alt="image here" />;
+                    })}
+                </li>
+                <li>
+                  Artist Name: {item.name}
+                  Release Date :{item.release_date}
+                  Total Tracks: {item.total_tracks}
+                  Spotify Album Link : {item.external_urls.spotify}
+                </li>
+                <div>
+                  {item.artists.map((artistsIncluded: any) => {
+                    return <li>Artists Included {artistsIncluded.name}</li>;
+                  })}
+                </div>
+              </div>
+            );
+          })
+        : null} */
 }
