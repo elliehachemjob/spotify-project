@@ -56,7 +56,15 @@ function Dashboard() {
                       {filteredItem.images
                         .filter((img: any) => img.height === 160)
                         .map((img: any) => {
-                          return <img src={img.url} />;
+                          return (
+                            <img
+                              src={
+                                !img.url
+                                  ? "https://www.legal.ca/public/uploads/images/noimage.jpg"
+                                  : img.url
+                              }
+                            />
+                          );
                         })}
 
                       <Typography>{filteredItem.name}</Typography>
