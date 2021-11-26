@@ -3,11 +3,6 @@
   flex-wrap: wrap;
 }
 
-.album-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .item {
   margin: 5px;
 }

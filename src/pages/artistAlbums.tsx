@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
+import "../App.css";
 
 interface Props {}
 
@@ -42,13 +43,13 @@ function ArtistAlbums(props: Props) {
   };
 
   return (
-    <div onClick={showArtistAlbums}>
+    <div className="container" onClick={showArtistAlbums}>
       hi
       {items
         ? items.items.map((item: any) => {
             return (
               <div>
-                <Card sx={{ maxWidth: 300 }}>
+                <Card className="item" sx={{ maxWidth: 300 }}>
                   <CardContent>
                     {item.images
                       .filter((img: any) => img.height === 300)
@@ -70,7 +71,7 @@ function ArtistAlbums(props: Props) {
                       color="text.secondary"
                       gutterBottom
                     >
-                      {item.name}
+                      {/* {item.name} */}
                     </Typography>
                     <Typography
                       sx={{ position: "relative", top: 35 }}
@@ -89,7 +90,7 @@ function ArtistAlbums(props: Props) {
                       color="text.secondary"
                     >
                       {item.artists.map((artistsIncluded: any) => {
-                        return <li>Artists Included {artistsIncluded.name}</li>;
+                        return <span> {artistsIncluded.name} /</span>;
                       })}
                     </Typography>
                   </CardContent>
