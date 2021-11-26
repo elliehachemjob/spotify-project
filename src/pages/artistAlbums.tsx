@@ -18,6 +18,7 @@ function ArtistAlbums(props: Props) {
   const [artistIncluded, setArtistIncluded] = useState<any>();
   const [albumCover, setAlbumCover] = useState<any>();
   const [items, setItems] = useState<any>();
+  const [value, setValue] = useState<any>();
 
   const showArtistAlbums = () => {
     axios
