@@ -17,8 +17,9 @@ function ArtistAlbums(props: Props) {
   const [albumLink, setAlbumLink] = useState<any>();
   const [artistIncluded, setArtistIncluded] = useState<any>();
   const [albumCover, setAlbumCover] = useState<any>();
+  const [items, setItems] = useState<any>();
 
-  const AlbumSearch = () => {
+  const showArtistAlbums = () => {
     axios
       .get(
         `https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/albums?include_groups=single%2Cappears_on&market=ES&limit=10&offset=5`,
@@ -26,29 +27,12 @@ function ArtistAlbums(props: Props) {
           headers: {
             Authorization:
               "Bearer " +
-              "BQDMm5J1Y_tQ-ANet7ZzmcpjZgseUYt07v_k2AcxlXO2ercapewXcPLTTXK44Dy-Qkaz_a-jaGvNRxfxQzrvGnGjlaGwC0VlkZcvYyK5auVLkzn-U4eOwQoEA8Yg-0h8ouwlbbMZVxgM1zE829GsRt_0yrFr4zqZRlZccyS458fD02JGzQ",
+              "BQBGWT-px2FRPl522lyrrfuTfSxHfThgJss6keHiy-7VvHqK0gRZ7RfPYXKzxW8ptR31icXj3yuwXkDbXeeBfAUbeBwFRN59owzX2_KDDAUQDHtop5669v4hsQn0kRYjhjPrCB2Oxap7wF_6ZsRswzcBqi1a_YbeIsA-mykTScpnAhSxww",
           },
         }
       )
       .then((response) => {
-        console.log(response);
-        console.log(`album name ${response.data.items[1].name}`);
-        console.log(`release date ${response.data.items[1].release_date}`);
-        console.log(`total tracks ${response.data.items[1].total_tracks}`);
-        console.log(
-          `preview album link ${response.data.items[1].external_urls.spotify}`
-        );
-        console.log(
-          `Artits included  ${response.data.items[1].artists[0].name}`
-        );
-        console.log(`Album cover is  ${response.data.items[1].images[0].url}`);
-
-        setAlbumName(response.data.items[1].name);
-        setReleaseDate(response.data.items[1].release_date);
-        setTotalTracks(response.data.items[1].total_tracks);
-        setAlbumLink(response.data.items[1].external_urls.spotify);
-        setArtistIncluded(response.data.items[1].artists[0].name);
-        setAlbumCover(response.data.items[1].images[0].url);
+        setItems(response.data);
       })
 
       .catch((error) => {
@@ -57,50 +41,34 @@ function ArtistAlbums(props: Props) {
   };
 
   return (
-    <div onClick={AlbumSearch}>
-      <Card sx={{ maxWidth: 300 }}>
-        <CardContent>
-          <CardMedia
-            component="img"
-            height="200"
-            image={albumCover}
-            alt="album cover"
-          />
-          <Typography>{albumName}</Typography>
-
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Tom Petty
-          </Typography>
-          <Typography
-            sx={{ position: "relative", top: 35 }}
-            color="text.secondary"
-          >
-            {releaseData}
-          </Typography>
-          <Typography
-            sx={{ position: "relative", top: 30 }}
-            color="text.secondary"
-          >
-            {totalTracks} tracks
-          </Typography>
-          <Typography
-            sx={{ position: "relative", top: 25 }}
-            color="text.secondary"
-          >
-            {artistIncluded}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-            onClick={() => {
-              window.open(albumLink);
-            }}
-            size="small"
-          >
-            Preview On Spotify
-          </Button>
-        </CardActions>
-      </Card>
+    <div onClick={showArtistAlbums}>
+      hi
+      {items
+        ? items.items.map((item: any) => {
+            return (
+              <div>
+                <li>
+                  {item.images
+                    .filter((img: any) => img.height === 300)
+                    .map((img: any) => {
+                      return <img src={img.url} alt="image here" />;
+                    })}
+                </li>
+                <li>
+                  Artist Name: {item.name}
+                  Release Date :{item.release_date}
+                  Total Tracks: {item.total_tracks}
+                  Spotify Album Link : {item.external_urls.spotify}
+                </li>
+                <div>
+                  {item.artists.map((artistsIncluded: any) => {
+                    return <li>Artists Included {artistsIncluded.name}</li>;
+                  })}
+                </div>
+              </div>
+            );
+          })
+        : null}
     </div>
   );
 }

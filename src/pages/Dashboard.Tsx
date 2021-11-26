@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
-import ArtistCard from "../components/ArtistCard";
 import "../App.css";
 
 function Dashboard() {

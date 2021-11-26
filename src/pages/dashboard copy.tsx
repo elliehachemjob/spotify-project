@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
-import ArtistCard from "../components/ArtistCard";
 import "../App.css";
 
 function Dashboard() {
@@ -85,15 +84,7 @@ function Dashboard() {
     <div className="container">
       <SearchComponent searchQuery={searchQuery} onChange={searchArtist} />
 
-      <Link to="/artist/albums">
-        <ArtistCard
-          image={image}
-          name={name}
-          value={value}
-          setValue={setValue}
-          followers={followers}
-        />
-      </Link>
+      <Link to="/artist/albums"></Link>
     </div>
   );
 }
